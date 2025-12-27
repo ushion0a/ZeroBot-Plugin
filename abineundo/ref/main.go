@@ -28,7 +28,7 @@ func main() {
 	fo.Close()
 
 	regf := path.Join(*root, "custom/register.go")
-	tgtf := path.Join(*root, "abineundo/ref/custom/register.go")
+	//tgtf := path.Join(*root, "abineundo/ref/custom/register.go")
 	if _, err := os.Stat(regf); err != nil {
 		if os.IsNotExist(err) {
 			_ = os.WriteFile(tgtf, []byte("// Package custom ...\npackage custom\n"), 0644)
