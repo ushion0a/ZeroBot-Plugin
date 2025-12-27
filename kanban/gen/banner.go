@@ -35,6 +35,7 @@ func main() {
 		panic(err)
 	}
 	defer f.Close()
+	
 	vartag := bytes.NewBuffer(nil)
 	vartagcmd := exec.Command("git", "tag", "--sort=committerdate")
 	vartagcmd.Stdout = vartag
@@ -42,9 +43,35 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	s := strings.Split(vartag.String(), "\n")
+	
+	// 修复：正确处理标签输出
+	output := strings.TrimSpace(vartag.String())
+	var version string
+	
+	if output == "" {
+		// 如果没有git标签，使用默认版本
+		version = "v0.0.0-dev"
+	} else {
+		// 分割标签，过滤空行
+		lines := strings.Split(output, "\n")
+		validTags := make([]string, 0)
+		
+		for _, line := range lines {
+			if strings.TrimSpace(line) != "" {
+				validTags = append(validTags, line)
+			}
+		}
+		
+		if len(validTags) == 0 {
+			version = "v0.0.0-dev"
+		} else {
+			// 使用最新的标签（最后一个）
+			version = validTags[len(validTags)-1]
+		}
+	}
+	
 	now := time.Now()
-	_, err = fmt.Fprintf(f, banner, s[len(s)-2], now.Year(), now.Format(timeformat))
+	_, err = fmt.Fprintf(f, banner, version, now.Year(), now.Format(timeformat))
 	if err != nil {
 		panic(err)
 	}
