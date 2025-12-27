@@ -1,6 +1,5 @@
 // Package main generates banner.go
 package main
-package banner
 
 import (
 	"bytes"
