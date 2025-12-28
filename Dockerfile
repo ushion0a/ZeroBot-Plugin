@@ -8,7 +8,11 @@ WORKDIR /build
 COPY ./ .
 
 RUN set -ex \
-    && cd /build \
+    && go run abineundo/ref/main.go -r /build \
+    && echo "Generated files:" \
+    && ls -la /build/abineundo/ref/custom/ || true
+
+RUN set -ex \
     && go build -ldflags "-s -w -extldflags '-static'" -o cqhttp
 
 FROM alpine:latest
