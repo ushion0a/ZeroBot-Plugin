@@ -33,7 +33,7 @@ FROM alpine:latest
 WORKDIR /data
 
 # 安装必要的运行时依赖
-# RUN apk add --no-cache ca-certificates tzdata curl
+RUN apk add --no-cache ca-certificates tzdata curl
 
 # 从构建阶段复制应用
 COPY --from=builder /data/zbp_linux_amd64 /app/bin
