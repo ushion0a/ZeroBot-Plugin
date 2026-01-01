@@ -1,49 +1,48 @@
+# 多阶段构建：第一阶段构建应用
 FROM golang:1.25-alpine AS builder
 
-ENV GO111MODULE=auto \
-    CGO_ENABLED=0 \
-    LD_FLAGS="-w -s"
-
-WORKDIR /build
-RUN apk add --no-cache --update git
-
-COPY ./ .
-RUN set -ex \
-     go mod tidy \
-     go generate main.go
-
-RUN set -ex \
-     go build -trimpath -ldflags "$LD_FLAGS -extldflags '-static'" -o cqhttp .
-
-FROM alpine:latest
-
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-
-RUN chmod +x /docker-entrypoint.sh && \
-    apk add --no-cache --update \
-      ffmpeg \
-      coreutils \
-      shadow \
-      su-exec \
-      tzdata && \
-    rm -rf /var/cache/apk/* && \
-    mkdir -p /app && \
-    mkdir -p /data && \
-    mkdir -p /config && \
-    useradd -d /config -s /bin/sh abc && \
-    chown -R abc /config && \
-    chown -R abc /data
-
-ENV TZ="Asia/Shanghai"
-ENV UID=99
-ENV GID=100
-ENV UMASK=002
-
-COPY --from=builder /build/cqhttp /app/
-
+# 设置工作目录
 WORKDIR /data
 
-VOLUME [ "/data" ]
+# 安装必要的构建工具
+RUN apk add --no-cache git gcc musl-dev
 
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
-CMD [ "/app/cqhttp" ]
+# 复制go模块文件
+COPY go.mod go.sum ./
+RUN go mod download
+
+# 复制源代码
+COPY . .
+
+# 设置构建环境变量
+ENV CGO_ENABLED=0 \
+    GOOS=linux \
+    GOARCH=amd64 \
+    LD_FLAGS="-w -s"
+
+# 生成文件（如果项目需要）
+RUN go generate ./...
+
+# 构建应用
+RUN go build -o zbp_linux_amd64 -trimpath -ldflags "$LD_FLAGS" .
+
+# 第二阶段：运行环境
+FROM alpine:latest
+
+# 设置工作目录
+WORKDIR /data
+
+# 安装必要的运行时依赖
+# RUN apk add --no-cache ca-certificates tzdata curl
+
+# 从构建阶段复制应用
+COPY --from=builder /data/zbp_linux_amd64 /data/app
+
+# 设置执行权限
+RUN chmod +x /data/app
+
+# 暴露端口（根据应用实际需要调整）
+# EXPOSE 8080
+
+# 以root用户运行应用
+CMD ["/data/app"]
