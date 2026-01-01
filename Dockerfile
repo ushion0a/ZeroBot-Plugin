@@ -9,12 +9,11 @@ RUN apk add --no-cache --update git
 
 COPY ./ .
 RUN set -ex \
-    && echo "运行 go generate..." \
-    && go generate ./...
+     go mod tidy \
+     go generate main.go
 
 RUN set -ex \
-    && echo "开始构建..." \
-    && go build -trimpath -ldflags "$LD_FLAGS -extldflags '-static'" -o cqhttp .
+     go build -trimpath -ldflags "$LD_FLAGS -extldflags '-static'" -o cqhttp .
 
 FROM alpine:latest
 
