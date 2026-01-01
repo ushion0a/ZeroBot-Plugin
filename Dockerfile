@@ -1,7 +1,7 @@
-FROM golang:1.24-alpine AS builder
+FROM golang:1.25-alpine AS builder
 
 RUN go env -w GO111MODULE=auto \
-  && go env -w CGO_ENABLED=0 
+  && go env -w CGO_ENABLED=1 
 
 WORKDIR /build
 
@@ -13,7 +13,7 @@ RUN set -ex \
     && ls -la /build/abineundo/ref/custom/ || true
 
 RUN set -ex \
-    && go build -ldflags "-s -w -extldflags '-static'" -o cqhttp
+    && go build -ldflags "-s -w" -o cqhttp
 
 FROM alpine:latest
 
