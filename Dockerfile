@@ -1,19 +1,20 @@
 FROM golang:1.25-alpine AS builder
 
-RUN go env -w GO111MODULE=auto \
-  && go env -w CGO_ENABLED=0
+ENV GO111MODULE=auto \
+    CGO_ENABLED=0 \
+    LD_FLAGS="-w -s"
 
 WORKDIR /build
 
+
 COPY ./ .
+RUN set -ex \
+    && echo "运行 go generate..." \
+    && go generate ./...
 
 RUN set -ex \
-    && go run abineundo/ref/main.go -r /build \
-    && echo "Generated files:" \
-    && ls -la /build/abineundo/ref/custom/ || true
-
-RUN set -ex \
-    && go build -ldflags "-s -w" -o cqhttp
+    && echo "开始构建..." \
+    && go build -trimpath -ldflags "$LD_FLAGS -extldflags '-static'" -o cqhttp .
 
 FROM alpine:latest
 
