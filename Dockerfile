@@ -5,7 +5,7 @@ ENV GO111MODULE=auto \
     LD_FLAGS="-w -s"
 
 WORKDIR /build
-
+RUN apk add --nocache --update git
 
 COPY ./ .
 RUN set -ex \
