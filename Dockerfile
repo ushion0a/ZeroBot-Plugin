@@ -24,7 +24,7 @@ ENV CGO_ENABLED=0 \
 RUN go generate ./...
 
 # 构建应用
-RUN go build -o zbp_linux_amd64 -trimpath -ldflags "$LD_FLAGS" .
+RUN go build -o /data/zbp_linux_amd64 -trimpath -ldflags "$LD_FLAGS" .
 
 # 第二阶段：运行环境
 FROM alpine:latest
