@@ -19,6 +19,7 @@ ENV CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64 \
     LD_FLAGS="-w -s"
+    
 
 # 生成文件（如果项目需要）
 RUN go generate ./...
