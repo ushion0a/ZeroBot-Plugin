@@ -36,13 +36,13 @@ WORKDIR /data
 # RUN apk add --no-cache ca-certificates tzdata curl
 
 # 从构建阶段复制应用
-COPY --from=builder /data/zbp_linux_amd64 /data/app
+COPY --from=builder /data/zbp_linux_amd64 /app/bin
 
 # 设置执行权限
-RUN chmod +x /data/app
+RUN chmod +x /app/bin
 
 # 暴露端口（根据应用实际需要调整）
 # EXPOSE 8080
 
 # 以root用户运行应用
-CMD ["/data/app"]
+CMD ["/app/bin"]
