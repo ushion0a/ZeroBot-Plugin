@@ -20,7 +20,7 @@
 
   [![go](https://goreportcard.com/badge/github.com/FloatTech/ZeroBot-Plugin?style=flat-square&logo=go)](https://goreportcard.com/badge/github.com/FloatTech/ZeroBot-Plugin)
   [![onebot](https://img.shields.io/badge/onebot-v11-black?style=flat-square&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAMAAADxPgR5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAxQTFRF////29vbr6+vAAAAk1hCcwAAAAR0Uk5T////AEAqqfQAAAKcSURBVHja7NrbctswDATQXfD//zlpO7FlmwAWIOnOtNaTM5JwDMa8E+PNFz7g3waJ24fviyDPgfhz8fHP39cBcBL9KoJbQUxjA2iYqHL3FAnvzhL4GtVNUcoSZe6eSHizBcK5LL7dBr2AUZlev1ARRHCljzRALIEog6H3U6bCIyqIZdAT0eBuJYaGiJaHSjmkYIZd+qSGWAQnIaz2OArVnX6vrItQvbhZJtVGB5qX9wKqCMkb9W7aexfCO/rwQRBzsDIsYx4AOz0nhAtWu7bqkEQBO0Pr+Ftjt5fFCUEbm0Sbgdu8WSgJ5NgH2iu46R/o1UcBXJsFusWF/QUaz3RwJMEgngfaGGdSxJkE/Yg4lOBryBiMwvAhZrVMUUvwqU7F05b5WLaUIN4M4hRocQQRnEedgsn7TZB3UCpRrIJwQfqvGwsg18EnI2uSVNC8t+0QmMXogvbPg/xk+Mnw/6kW/rraUlvqgmFreAA09xW5t0AFlHrQZ3CsgvZm0FbHNKyBmheBKIF2cCA8A600aHPmFtRB1XvMsJAiza7LpPog0UJwccKdzw8rdf8MyN2ePYF896LC5hTzdZqxb6VNXInaupARLDNBWgI8spq4T0Qb5H4vWfPmHo8OyB1ito+AysNNz0oglj1U955sjUN9d41LnrX2D/u7eRwxyOaOpfyevCWbTgDEoilsOnu7zsKhjRCsnD/QzhdkYLBLXjiK4f3UWmcx2M7PO21CKVTH84638NTplt6JIQH0ZwCNuiWAfvuLhdrcOYPVO9eW3A67l7hZtgaY9GZo9AFc6cryjoeFBIWeU+npnk/nLE0OxCHL1eQsc1IciehjpJv5mqCsjeopaH6r15/MrxNnVhu7tmcslay2gO2Z1QfcfX0JMACG41/u0RrI9QAAAABJRU5ErkJggg==)](https://t.me/zerobotplugin)
-  [![zerobot](https://img.shields.io/badge/zerobot-v1.8.1-black?style=flat-square&logo=go)](https://github.com/wdvxdr1123/ZeroBot)
+  [![zerobot](https://img.shields.io/badge/zerobot-v1.8.2-black?style=flat-square&logo=go)](https://github.com/wdvxdr1123/ZeroBot)
 
 
   
@@ -655,6 +655,8 @@ print("run[CQ:image,file="+j["img"]+"]")
   - [x] 齁语解密 [密文] 或 h解密 [密文]
   - [x] fumo加密 [文本]
   - [x] fumo解密 [文本]
+  - [x] qq加密 [文本]
+  - [x] qq解密 [密文]
 
 </details>
 <details>
@@ -847,6 +849,16 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>猜成语</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/handou"`
+
+  - [x] 个人猜成语
+
+  - [x] 团队猜成语
+
+</details>
+<details>
   <summary>一言</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/hitokoto"`
@@ -916,6 +928,15 @@ print("run[CQ:image,file="+j["img"]+"]")
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/kfccrazythursday"`
 
   - [x] 疯狂星期四
+
+</details>
+<details>
+  <summary>大模型聊天和群聊总结</summary>
+
+  `_ "github.com/FloatTech/ZeroBot-Plugin/plugin/llm"`
+
+  - [x] 群聊总结 [消息数目]|群聊总结 1000
+  - [x] /gpt [内容]（使用大模型聊天）
 
 </details>
 <details>
@@ -1209,6 +1230,18 @@ print("run[CQ:image,file="+j["img"]+"]")
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/poker"`
 
   - [x] 抽扑克牌
+
+</details>
+<details>
+  <summary>来份猪猪</summary>
+  
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/pig"`
+
+  - [x] 随机猪猪
+  
+  - [x] 搜索猪猪[猪名字]
+
+  - [x] 猪猪id[猪id]
 
 </details>
 <details>
@@ -1516,6 +1549,16 @@ print("run[CQ:image,file="+j["img"]+"]")
 
 </details>
 <details>
+  <summary>小红书文案</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/xhstext"`
+
+  - [x] 捧场
+
+  - [x] 有梗
+
+</details>
+<details>
   <summary>游戏王白鸽API卡查</summary>
 
   `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/ygocdb"`
@@ -1594,9 +1637,9 @@ print("run[CQ:image,file="+j["img"]+"]")
 ### *低优先级*
 
 <details>
-  <summary>OpenAI聊天</summary>
+  <summary>大模型聊天和Agent配置</summary>
 
-  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/aichat"`
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/aichatcfg"`
 
   - [x] 设置AI聊天触发概率10
   - [x] 设置AI聊天温度80
@@ -1614,10 +1657,22 @@ print("run[CQ:image,file="+j["img"]+"]")
   - [x] 设置AI聊天最大长度4096
   - [x] 设置AI聊天TopP 0.9
   - [x] 设置AI聊天(不)以AI语音输出
+  - [x] 设置AI聊天Agent性格
+  - [x] 查看AI聊天Agent性格
+  - [x] 设置AI聊天Agent性别
+  - [x] 查看AI聊天Agent性别
+  - [x] 重置AI聊天Agent性格性别
+  - [x] 重置AI聊天Agent
   - [x] 查看AI聊天配置 
   - [x] 重置AI聊天
-  - [x] 群聊总结 [消息数目]|群聊总结 1000
-  - [x] /gpt [内容]（使用大模型聊天）
+
+</details>
+<details>
+  <summary>大模型聊天和Agent</summary>
+
+  `import _ "github.com/FloatTech/ZeroBot-Plugin/plugin/aichat"`
+
+  - [x] (随意聊天, 概率匹配)
 
 </details>
 <details>
