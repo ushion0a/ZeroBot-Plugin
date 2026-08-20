@@ -67,8 +67,8 @@ func persistCfg(c pluginConfig) error {
 func init() {
 	engine := control.AutoRegister(&ctrl.Options[*zero.Ctx]{
 		DisableOnDefault:  false,
-		Brief:            "入群自动欢迎 + 截图审核",
-		Help:             "- 设置审核群 <群号>\n- 设置大群 <群号>\n- 设置审核延迟 <秒数>\n- 查看审核配置",
+		Brief:             "入群自动欢迎 + 截图审核",
+		Help:              "- 设置审核群 <群号>\n- 设置大群 <群号>\n- 设置审核延迟 <秒数>\n- 查看审核配置",
 		PrivateDataFolder: "welcomereview",
 	})
 
